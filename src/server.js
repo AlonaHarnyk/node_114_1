@@ -7,6 +7,7 @@ import { notFoundHandler } from "./middlewares/notFoundHandler.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import productsRouter from "./routers/products.js";
 import authRouter from "./routers/users.js";
+import { swaggerDocs } from "./middlewares/swaggerDocs.js";
 
 const PORT = Number(env("PORT", "3000"));
 
@@ -18,6 +19,8 @@ export const setupServer = () => {
 
   app.use("/users", authRouter);
   app.use("/products", productsRouter);
+
+  app.use("/api-docs", swaggerDocs());
 
   app.use("*", notFoundHandler);
 
